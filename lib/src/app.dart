@@ -1,3 +1,4 @@
+import 'package:alex_astudillo_erp/src/app_binding.dart';
 import 'package:alex_astudillo_erp/src/localization/app_localizations.dart';
 import 'package:alex_astudillo_erp/src/ui/routes/route_names.dart';
 import 'package:alex_astudillo_erp/src/ui/routes/route_pages.dart';
@@ -12,6 +13,7 @@ class App extends StatelessWidget {
     return GetMaterialApp(
       fallbackLocale: const Locale('es', 'EC'),
       getPages: RoutePages.all,
+      initialBinding: const AppBinding(),
       initialRoute: RouteNames.signIn,
       locale: Get.deviceLocale,
       translations: const AppLocalizations(),
