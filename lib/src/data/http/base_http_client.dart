@@ -36,9 +36,11 @@ class BaseHttpClient {
       if (response.statusCode == 200) {
         return Future.value(response);
       }
+      final String? reason = response.reasonPhrase;
       throw _processResponse(
         response.statusCode,
         response.request?.url.toString() ?? uri.toString(),
+        reason == null || reason.isEmpty ? null : reason,
       );
     } on SocketException {
       throw FetchDataException('No internet connection', uri.toString());
@@ -72,10 +74,11 @@ class BaseHttpClient {
       if (response.statusCode == 200) {
         return Future.value(response);
       }
+      final String? reason = response.reasonPhrase;
       throw _processResponse(
         response.statusCode,
         response.request?.url.toString() ?? uri.toString(),
-        response.reasonPhrase,
+        reason == null || reason.isEmpty ? null : reason,
       );
     } on SocketException {
       throw FetchDataException('No internet connection', uri.toString());

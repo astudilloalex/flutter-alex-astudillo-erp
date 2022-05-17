@@ -7,10 +7,10 @@ import 'package:get/get.dart';
 class AppController extends GetxController {
   void manageHttpError(final HttpException exception) {
     if (Get.isSnackbarOpen) Get.back();
-    if (exception.prefix == 'Unauthorized request') {
+    if (exception.prefix == 'Unauthorized request' &&
+        Get.currentRoute != RouteNames.signIn) {
       Get.offAllNamed(RouteNames.signIn);
     }
-
     Get.showSnackbar(ErrorSnackbar(exception.message));
   }
 
