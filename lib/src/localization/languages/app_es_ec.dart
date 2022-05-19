@@ -1,7 +1,15 @@
 const Map<String, String> appEsEc = {
+  'advancedSettings': 'Configuración avanzada',
+  'cancel': 'Cancelar',
+  'chooseWorkDomain': 'Elegir dominio de trabajo',
+  'company': 'Empresa',
+  'countries': 'Países',
   'enter': 'Ingresar',
+  'establishment': 'Establecimiento',
+  'loading': 'Cargando',
   'noInternetConnection': 'Sin conexión a internet',
   'password': 'Contraseña',
+  'save': 'Guardar',
   'signIn': 'Iniciar sesión',
   'username': 'Usuario',
 };

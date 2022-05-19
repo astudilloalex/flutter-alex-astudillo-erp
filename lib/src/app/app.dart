@@ -1,7 +1,8 @@
-import 'package:alex_astudillo_erp/src/app_binding.dart';
+import 'package:alex_astudillo_erp/src/app/app_binding.dart';
 import 'package:alex_astudillo_erp/src/localization/app_localizations.dart';
 import 'package:alex_astudillo_erp/src/ui/routes/route_names.dart';
 import 'package:alex_astudillo_erp/src/ui/routes/route_pages.dart';
+import 'package:alex_astudillo_erp/src/ui/theme/app_theme_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,11 +12,13 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       fallbackLocale: const Locale('es', 'EC'),
       getPages: RoutePages.all,
       initialBinding: const AppBinding(),
-      initialRoute: RouteNames.signIn,
+      initialRoute: RouteNames.splash,
       locale: Get.deviceLocale,
+      theme: AppThemeData.light,
       translations: const AppLocalizations(),
     );
   }

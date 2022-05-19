@@ -1,15 +1,20 @@
-import 'package:alex_astudillo_erp/src/app_controller.dart';
+import 'package:alex_astudillo_erp/src/app/controllers/app_controller.dart';
+import 'package:alex_astudillo_erp/src/app/controllers/auth_controller.dart';
 import 'package:alex_astudillo_erp/src/core/exceptions/http_exceptions.dart';
+import 'package:alex_astudillo_erp/src/data/http/company/company_http.dart';
+import 'package:alex_astudillo_erp/src/data/http/company/establishment_http.dart';
 import 'package:alex_astudillo_erp/src/data/http/src/sign_in_http.dart';
+import 'package:alex_astudillo_erp/src/data/local/secure_storage_local.dart';
 import 'package:alex_astudillo_erp/src/domain/requests/src/sign_in_request.dart';
-import 'package:alex_astudillo_erp/src/domain/responses/src/sign_in_response.dart';
+import 'package:alex_astudillo_erp/src/domain/responses/security/sign_in_response.dart';
 import 'package:alex_astudillo_erp/src/ui/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignInController extends GetxController {
-  SignInController(this._appController);
+  SignInController(this._appController, this._authController);
   final AppController _appController;
+  final AuthController _authController;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -38,7 +43,23 @@ class SignInController extends GetxController {
             password: passwordController.text,
           ),
         );
-        if (response.response.status == 200) {
+        if (response.defaultResponse.status == 200) {
+          await const SecureStorageLocal().saveToken(response.token);
+          await const CompanyHttp()
+              .company(_appController.localStorage.currentCompanyId)
+              .then((value) {
+            _appController.company = value.companies.first;
+          });
+          await const EstablishmentHttp()
+              .companyEstablishments(
+            _appController.company!.id!,
+          )
+              .then(
+            (value) {
+              _appController.establishment = value.establishments.first;
+            },
+          );
+          _authController.user = response.user;
           Get.offNamed(RouteNames.home);
         }
       } on HttpException catch (e) {

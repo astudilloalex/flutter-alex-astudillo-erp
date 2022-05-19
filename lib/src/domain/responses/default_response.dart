@@ -1,5 +1,5 @@
-class Response {
-  const Response({
+class DefaultResponse {
+  const DefaultResponse({
     required this.message,
     required this.status,
   });
@@ -7,8 +7,8 @@ class Response {
   final String message;
   final int status;
 
-  factory Response.fromJson(final Map<String, dynamic> json) {
-    return Response(
+  factory DefaultResponse.fromJson(final Map<String, dynamic> json) {
+    return DefaultResponse(
       message: json['message'] as String,
       status: json['status'] as int,
     );

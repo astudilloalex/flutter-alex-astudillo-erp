@@ -35,12 +35,13 @@ class Phone {
 
   factory Phone.fromJson(final Map<String, dynamic> json) {
     return Phone(
-        id: json['id'] as int,
-        number: json['number'] as String,
-        personId: json['person'] as int,
-        active: json['active'] as bool,
-        creationDate: DateTime.tryParse(json['creationDate'].toString()),
-        updateDate: DateTime.tryParse(json['updateDate'].toString()));
+      id: json['id'] as int,
+      number: json['number'] as String,
+      personId: json['person'] as int,
+      active: json['active'] as bool,
+      creationDate: DateTime.tryParse(json['creationDate'].toString()),
+      updateDate: DateTime.tryParse(json['updateDate'].toString()),
+    );
   }
 
   Map<String, dynamic> toJson() {
