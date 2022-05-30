@@ -40,14 +40,14 @@ class AddEditCountryController extends GetxController {
       try {
         const CountryHttp http = CountryHttp();
         final CountryResponse response = country == null
-            ? await http.addCountry(
+            ? await http.create(
                 Country(
                   code: codeController.text.trim(),
                   name: nameController.text.trim(),
                   active: _active.value,
                 ),
               )
-            : await http.updateCountry(
+            : await http.update(
                 country!.copyWith(
                   code: codeController.text.trim(),
                   name: nameController.text.trim(),

@@ -23,11 +23,11 @@ class SplashController extends GetxController {
 
   Future<void> _init() async {
     try {
-      await const UserHttp().user.then((value) {
-        _authController.user = value.users.first;
-      });
+      // await const UserHttp().user.then((value) {
+      //   _authController.user = value.users.first;
+      // });
       await const CompanyHttp()
-          .company(_appController.localStorage.currentCompanyId)
+          .findById(_appController.localStorage.currentCompanyId)
           .then((value) {
         _appController.company = value.companies.first;
       });

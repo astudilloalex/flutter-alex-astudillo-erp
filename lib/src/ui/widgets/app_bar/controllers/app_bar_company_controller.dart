@@ -27,7 +27,7 @@ class AppBarCompanyController extends GetxController {
 
   Future<void> _init() async {
     try {
-      await const CompanyHttp().myCompanies().then((value) {
+      await const CompanyHttp().read().then((value) {
         _companies(value.companies);
       });
       _selectedCompany(

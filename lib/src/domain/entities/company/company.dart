@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:alex_astudillo_erp/src/domain/entities/company/person.dart';
+
+String companyToJson(final Company data) => json.encode(data.toJson());
 
 class Company {
   const Company({

@@ -1,40 +1,33 @@
-import 'package:alex_astudillo_erp/src/app/controllers/app_controller.dart';
-import 'package:alex_astudillo_erp/src/ui/routes/route_names.dart';
 import 'package:alex_astudillo_erp/src/ui/widgets/app_bar/custom_app_bar.dart';
-import 'package:alex_astudillo_erp/src/ui/widgets/drawer/custom_drawer.dart';
+import 'package:alex_astudillo_erp/src/ui/widgets/sidebar/custom_sidebar.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:responsive_design/responsive_design.dart';
 
 class CustomScaffold extends StatelessWidget {
   const CustomScaffold({
     Key? key,
+    this.appBar,
     this.body,
+    this.bottomNavigationBar,
+    this.floatingActionButton,
+    this.floatingActionButtonLocation,
   }) : super(key: key);
 
+  final PreferredSizeWidget? appBar;
   final Widget? body;
+  final Widget? bottomNavigationBar;
+  final Widget? floatingActionButton;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
 
   @override
   Widget build(BuildContext context) {
-    final AppController controller = Get.find<AppController>();
-    return ResponsiveWidget(
-      desktop: Scaffold(
-        appBar: const CustomAppBar(),
-        body: Row(
-          children: [
-            const CustomDrawer(),
-            if (body != null) Expanded(child: body!),
-          ],
-        ),
-      ),
-      tablet: Scaffold(
-        appBar: const CustomAppBar(),
-        body: body,
-        drawer: const CustomDrawer(),
-        onDrawerChanged: (final bool open) {
-          controller.drawerOpen = open;
-        },
-      ),
+    return ResponsiveScaffold(
+      appBar: appBar ?? const CustomAppBar(),
+      sidebar: const CustomSidebar(),
+      body: body,
+      bottomNavigationBar: bottomNavigationBar,
+      floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: floatingActionButtonLocation,
     );
   }
 }

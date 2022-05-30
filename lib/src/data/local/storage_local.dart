@@ -1,4 +1,4 @@
-import 'package:alex_astudillo_erp/src/domain/repositories/local/storage_repository.dart';
+import 'package:alex_astudillo_erp/src/domain/repositories/src/local/storage_repository.dart';
 import 'package:get_storage/get_storage.dart';
 
 class StorageLocal implements StorageRepository {

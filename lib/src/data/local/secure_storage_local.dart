@@ -1,4 +1,4 @@
-import 'package:alex_astudillo_erp/src/domain/repositories/local/secure_storage_repository.dart';
+import 'package:alex_astudillo_erp/src/domain/repositories/src/local/secure_storage_repository.dart';
 
 class SecureStorageLocal implements SecureStorageRepository {
   const SecureStorageLocal();

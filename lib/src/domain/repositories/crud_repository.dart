@@ -1,6 +1,7 @@
 /// The common CRUD repository.
-/// The [T] represents the returns, and [E] represents the entity.
-abstract class CrudRepository<T, E> {
+/// The [T] represents the returns, and [E] represents the entity and [ID] is
+/// data type of the id.
+abstract class CrudRepository<T, E, ID> {
   /// Define a [CrudRepository] class.
   const CrudRepository();
 
@@ -15,4 +16,7 @@ abstract class CrudRepository<T, E> {
 
   /// Returns a [T], when delete a [entity].
   Future<T> delete(final E entity);
+
+  /// Returns a [T], when find by [id].
+  Future<T> findById(final ID id);
 }

@@ -16,6 +16,7 @@ class CountryList extends StatelessWidget {
           thumbVisibility: true,
           child: ListView.builder(
             itemCount: controller.countries.length,
+            primary: false,
             itemBuilder: (_, index) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12.0),

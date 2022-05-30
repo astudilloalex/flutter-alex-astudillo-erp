@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 class AppController extends GetxController {
   final StorageLocal localStorage = const StorageLocal();
+  final StringBuffer _currentRoute = StringBuffer();
 
   bool drawerOpen = false;
 
@@ -21,6 +22,11 @@ class AppController extends GetxController {
 
   // }
 
+  void changeRoute(final Routing routing) {
+    _currentRoute.clear();
+    _currentRoute.write(routing.current);
+  }
+
   void manageHttpError(final HttpException exception) {
     if (Get.isSnackbarOpen) Get.back();
     if (exception.prefix == 'Unauthorized request' &&
@@ -30,9 +36,14 @@ class AppController extends GetxController {
     Get.showSnackbar(ErrorSnackbar(exception.message));
   }
 
-  void manageError(final Exception e) {
+  void manageError(final Exception? e) {
     if (Get.isSnackbarOpen) Get.back();
     Get.showSnackbar(ErrorSnackbar(e.toString()));
+  }
+
+  void showErrorSnackbar(final String error) {
+    if (Get.isSnackbarOpen) Get.back();
+    Get.showSnackbar(ErrorSnackbar(error));
   }
 
   void showOverlay(final Future Function() asyncFunction) {
@@ -41,4 +52,6 @@ class AppController extends GetxController {
       asyncFunction: asyncFunction,
     );
   }
+
+  String get currentRoute => _currentRoute.toString();
 }

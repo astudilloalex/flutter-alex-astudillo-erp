@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+String countryToJson(final Country data) => json.encode(data.toJson());
+
 class Country {
   const Country({
     this.id,
@@ -20,14 +24,16 @@ class Country {
     final String? code,
     final String? name,
     final bool? active,
+    final DateTime? creationDate,
+    final DateTime? updateDate,
   }) {
     return Country(
       id: id ?? this.id,
       code: code ?? this.code,
       name: name ?? this.name,
       active: active ?? this.active,
-      creationDate: creationDate,
-      updateDate: updateDate,
+      creationDate: creationDate ?? this.creationDate,
+      updateDate: updateDate ?? this.updateDate,
     );
   }
 

@@ -21,15 +21,15 @@ class CompanyResponse {
   final DefaultResponse defaultResponse;
 
   factory CompanyResponse.fromJson(final Map<String, dynamic> json) {
-    final List<dynamic> data = json['data'] == null
-        ? []
-        : json['data'] is Map<String, dynamic>
-            ? [json['data']]
-            : [...json['data']];
+    final List<dynamic> data =
+        json['data'] == null ? [] : json['data'] as List<dynamic>;
     return CompanyResponse(
-      companies: List<Company>.from(
-        data.map((value) => Company.fromJson(value as Map<String, dynamic>)),
-      ),
+      companies: data.contains(null)
+          ? []
+          : List<Company>.from(
+              data.map(
+                  (value) => Company.fromJson(value as Map<String, dynamic>)),
+            ),
       defaultResponse: DefaultResponse.fromJson(json),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:alex_astudillo_erp/src/domain/entities/company/person.dart';
 import 'package:alex_astudillo_erp/src/domain/entities/security/role.dart';
 
 class User {
@@ -8,7 +9,7 @@ class User {
     this.accountNonExpired = true,
     this.credentialsNonExpired = true,
     this.enabled = true,
-    required this.personId,
+    required this.person,
     this.creationDate,
     this.updateDate,
     required this.roles,
@@ -20,7 +21,7 @@ class User {
   final bool accountNonExpired;
   final bool credentialsNonExpired;
   final bool enabled;
-  final int personId;
+  final Person person;
   final DateTime? creationDate;
   final DateTime? updateDate;
   final List<Role> roles;
@@ -32,7 +33,7 @@ class User {
     final bool? accountNonExpired,
     final bool? credentialsNonExpired,
     final bool? enabled,
-    final int? personId,
+    final Person? person,
     final DateTime? creationDate,
     final DateTime? updateDate,
     final List<Role>? roles,
@@ -45,7 +46,7 @@ class User {
       credentialsNonExpired:
           credentialsNonExpired ?? this.credentialsNonExpired,
       enabled: enabled ?? this.enabled,
-      personId: personId ?? this.personId,
+      person: person ?? this.person,
       creationDate: creationDate ?? this.creationDate,
       updateDate: updateDate ?? this.updateDate,
       roles: roles ?? this.roles,
@@ -59,7 +60,7 @@ class User {
         accountNonExpired: json['accountNonExpired'] as bool,
         credentialsNonExpired: json['credentialsNonExpired'] as bool,
         enabled: json['enabled'] as bool,
-        personId: json['person'] as int,
+        person: Person.fromJson(json['person'] as Map<String, dynamic>),
         creationDate: DateTime.tryParse(json['creationDate'].toString()),
         updateDate: DateTime.tryParse(json['updateDate'].toString()),
         roles: List<Role>.from(
@@ -76,7 +77,7 @@ class User {
         'accountNonExpired': accountNonExpired,
         'credentialsNonExpired': credentialsNonExpired,
         'enabled': enabled,
-        'person': personId,
+        'person': person.toJson(),
         'roles': List<dynamic>.from(roles.map((x) => x.toJson())),
       };
 }

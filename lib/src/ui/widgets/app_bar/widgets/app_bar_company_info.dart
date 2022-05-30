@@ -59,6 +59,10 @@ class AppBarCompanyInfo extends StatelessWidget {
     Get.lazyPut<AppBarCompanyController>(
       () => AppBarCompanyController(Get.find<AppController>()),
     );
-    Get.dialog(const AppBarCompanyDialog(), barrierDismissible: false);
+    if (Get.isDialogOpen ?? false) Get.back();
+    Get.dialog(
+      const AppBarCompanyDialog(),
+      barrierDismissible: false,
+    );
   }
 }

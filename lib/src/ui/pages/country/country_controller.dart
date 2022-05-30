@@ -16,7 +16,7 @@ class CountryController extends GetxController {
   final AppController appController;
   final CountryHttp countryHttp;
 
-  final ScrollController scrollController = ScrollController();
+  final int _pageSize = 25;
 
   bool _loading = true;
   final List<Country> _countries = [];
@@ -31,15 +31,9 @@ class CountryController extends GetxController {
     _init();
   }
 
-  @override
-  void onClose() {
-    scrollController.dispose();
-    super.onClose();
-  }
-
   Future<void> _init() async {
     try {
-      final CountryResponse response = await countryHttp.countries();
+      final CountryResponse response = await countryHttp.read(size: _pageSize);
       _countries.addAll(response.countries);
       _defaultResponse = response.defaultResponse;
     } on HttpException catch (e) {
@@ -56,8 +50,9 @@ class CountryController extends GetxController {
     _loading = true;
     update();
     try {
-      final CountryResponse response = await countryHttp.countries(
+      final CountryResponse response = await countryHttp.read(
         page: (_defaultResponse.pageNumber ?? 1) + 1,
+        size: _pageSize,
       );
       _countries.clear();
       _countries.addAll(response.countries);
@@ -72,8 +67,9 @@ class CountryController extends GetxController {
     _loading = true;
     update();
     try {
-      final CountryResponse response = await countryHttp.countries(
+      final CountryResponse response = await countryHttp.read(
         page: (_defaultResponse.pageNumber ?? 2) - 1,
+        size: _pageSize,
       );
       _countries.clear();
       _countries.addAll(response.countries);

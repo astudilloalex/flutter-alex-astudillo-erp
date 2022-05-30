@@ -6,6 +6,8 @@ class HomeController extends GetxController {
 
   final AppController _appController;
 
+  int pageIndex = 0;
+
   // @override
   // void onInit() {
   //   super.onInit();

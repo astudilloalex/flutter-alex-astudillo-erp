@@ -12,20 +12,14 @@ class AdvancedSettingsOptions extends StatelessWidget {
     final AppController appController = Get.find<AppController>();
     return GetBuilder<AuthController>(builder: (controller) {
       if (!controller.isSuperuser) return const SizedBox.shrink();
-      return ExpansionTile(
+      return ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10.0),
+        onTap: () {
+          if (appController.drawerOpen) Get.back();
+          Get.offNamed(RouteNames.advancedSettings);
+        },
         title: Text('advancedSettings'.tr),
-        children: [
-          ListTile(
-            onTap: () {
-              if (appController.drawerOpen) Get.back();
-              Get.offNamed(
-                RouteNames.advancedSettings,
-                preventDuplicates: true,
-              );
-            },
-            title: Text('countries'.tr),
-          ),
-        ],
+        selected: appController.currentRoute == RouteNames.advancedSettings,
       );
     });
   }

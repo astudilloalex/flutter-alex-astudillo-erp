@@ -9,11 +9,12 @@ import 'package:http/http.dart' as http;
 class BaseHttpClient {
   const BaseHttpClient({
     this.apiAuthority = '192.168.18.8:8080',
-    this.apiPath = '/api/v1',
+    this.apiPath = UrlPaths.apiV1,
     this.https = false,
     this.secureStorageLocal = const SecureStorageLocal(),
     this.timeout = const Duration(seconds: 10),
   });
+
   final String apiAuthority;
   final String apiPath;
   final bool https;
@@ -28,6 +29,7 @@ class BaseHttpClient {
         ? Uri.https(apiAuthority, '$apiPath$path', parameters)
         : Uri.http(apiAuthority, '$apiPath$path', parameters);
     try {
+      print(uri);
       final String? token = await secureStorageLocal.jwtToken;
       final http.Response response = await http.get(
         uri,
@@ -61,6 +63,44 @@ class BaseHttpClient {
       final String? token = await secureStorageLocal.jwtToken;
       final http.Response response = await http
           .post(
+            uri,
+            headers: path == UrlPaths.signIn
+                ? null
+                : {
+                    HttpHeaders.authorizationHeader: token ?? '',
+                    'Content-Type': 'application/json',
+                  },
+            body: request,
+          )
+          .timeout(timeout);
+      if (response.statusCode == 200) {
+        return Future.value(response);
+      }
+      final String? reason = response.reasonPhrase;
+      throw _processResponse(
+        response.statusCode,
+        response.request?.url.toString() ?? uri.toString(),
+        reason == null || reason.isEmpty ? null : reason,
+      );
+    } on SocketException {
+      throw FetchDataException('No internet connection', uri.toString());
+    } on TimeoutException {
+      throw ApiNotRespondingException('Timeout', uri.toString());
+    }
+  }
+
+  Future<http.Response> put(
+    String path, {
+    String? request,
+    Map<String, String>? parameters,
+  }) async {
+    final Uri uri = https
+        ? Uri.https(apiAuthority, '$apiPath$path', parameters)
+        : Uri.http(apiAuthority, '$apiPath$path', parameters);
+    try {
+      final String? token = await secureStorageLocal.jwtToken;
+      final http.Response response = await http
+          .put(
             uri,
             headers: path == UrlPaths.signIn
                 ? null

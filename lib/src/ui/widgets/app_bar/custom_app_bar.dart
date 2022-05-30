@@ -6,10 +6,12 @@ import 'package:responsive_design/responsive_design.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     Key? key,
+    this.leading,
     this.title,
     this.toolbarHeight,
   }) : super(key: key);
 
+  final Widget? leading;
   final Widget? title;
   final double? toolbarHeight;
 
@@ -20,14 +22,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       AppBarAction(AppBarUserInfo(), showInAllScreens: true),
     ];
     return ResponsiveAppBar(
+      title: title,
       toolbarHeight: toolbarHeight,
       actions: actions,
       actionSpace: 16.0,
-      title: Image.asset(
-        'assets/images/app_icon.png',
-        height: 45.0,
-        width: 45.0,
-      ),
     );
   }
 

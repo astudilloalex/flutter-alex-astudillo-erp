@@ -46,7 +46,7 @@ class SignInController extends GetxController {
         if (response.defaultResponse.status == 200) {
           await const SecureStorageLocal().saveToken(response.token);
           await const CompanyHttp()
-              .company(_appController.localStorage.currentCompanyId)
+              .findById(_appController.localStorage.currentCompanyId)
               .then((value) {
             _appController.company = value.companies.first;
           });
@@ -56,7 +56,9 @@ class SignInController extends GetxController {
           )
               .then(
             (value) {
-              _appController.establishment = value.establishments.first;
+              if (value.establishments.isNotEmpty) {
+                _appController.establishment = value.establishments.first;
+              }
             },
           );
           _authController.user = response.user;

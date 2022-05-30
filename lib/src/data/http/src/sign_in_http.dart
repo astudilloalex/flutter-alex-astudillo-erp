@@ -1,6 +1,6 @@
 import 'package:alex_astudillo_erp/src/data/http/base_http_client.dart';
 import 'package:alex_astudillo_erp/src/data/http/url_paths.dart';
-import 'package:alex_astudillo_erp/src/domain/repositories/sign_in_repository.dart';
+import 'package:alex_astudillo_erp/src/domain/repositories/src/sign_in_repository.dart';
 import 'package:alex_astudillo_erp/src/domain/requests/src/sign_in_request.dart';
 import 'package:alex_astudillo_erp/src/domain/responses/security/sign_in_response.dart';
 import 'package:flutter/foundation.dart';
