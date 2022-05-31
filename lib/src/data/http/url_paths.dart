@@ -31,6 +31,9 @@ class UrlPaths {
   static const String persons = '/persons';
   static const String person = '/person';
 
+  // Privileges URL paths.
+  static const String privileges = '/privileges';
+
   // Phone URL paths
   static const String phones = '/phones';
 

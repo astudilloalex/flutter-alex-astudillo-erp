@@ -1,3 +1,4 @@
+import 'package:alex_astudillo_erp/src/ui/routes/route_names.dart';
 import 'package:alex_astudillo_erp/src/ui/widgets/app_bar/custom_app_bar.dart';
 import 'package:alex_astudillo_erp/src/ui/widgets/scaffold/custom_scaffold.dart';
 import 'package:alex_astudillo_erp/src/ui/widgets/square_card_button.dart';
@@ -33,7 +34,9 @@ class SecurityPage extends StatelessWidget {
                 SquareCardButton(
                   icon: const Icon(Icons.key_outlined),
                   titleText: 'privileges'.tr,
-                  onTap: () {},
+                  onTap: () => Get.toNamed(
+                    '${RouteNames.security}${RouteNames.privilege}',
+                  ),
                 ),
               ],
             ),

@@ -13,7 +13,7 @@ class SignInHttp implements SignInRepository {
 
   @override
   Future<SignInResponse> signIn(final SignInRequest request) async {
-    final http.Response response = await client.post(
+    final http.Response response = await client.postData(
       UrlPaths.signIn,
       request: await compute(signInRequestToJson, request),
     );

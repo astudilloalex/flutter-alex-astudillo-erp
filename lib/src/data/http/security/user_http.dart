@@ -31,7 +31,7 @@ class UserHttp implements UserRepository {
 
   @override
   Future<UserResponse> read({final int page = 1, final int size = 10}) async {
-    final http.Response response = await client.get(
+    final http.Response response = await client.getData(
       '${UrlPaths.users}${UrlPaths.read}',
       {'page': '$page', 'size': '$size'},
     );

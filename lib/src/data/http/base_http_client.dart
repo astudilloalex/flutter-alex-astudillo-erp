@@ -21,7 +21,7 @@ class BaseHttpClient {
   final SecureStorageLocal secureStorageLocal;
   final Duration timeout;
 
-  Future<http.Response> get(
+  Future<http.Response> getData(
     final String path, [
     final Map<String, dynamic>? parameters,
   ]) async {
@@ -29,7 +29,6 @@ class BaseHttpClient {
         ? Uri.https(apiAuthority, '$apiPath$path', parameters)
         : Uri.http(apiAuthority, '$apiPath$path', parameters);
     try {
-      print(uri);
       final String? token = await secureStorageLocal.jwtToken;
       final http.Response response = await http.get(
         uri,
@@ -51,7 +50,7 @@ class BaseHttpClient {
     }
   }
 
-  Future<http.Response> post(
+  Future<http.Response> postData(
     String path, {
     String? request,
     Map<String, String>? parameters,
@@ -89,7 +88,7 @@ class BaseHttpClient {
     }
   }
 
-  Future<http.Response> put(
+  Future<http.Response> putData(
     String path, {
     String? request,
     Map<String, String>? parameters,
@@ -102,12 +101,46 @@ class BaseHttpClient {
       final http.Response response = await http
           .put(
             uri,
-            headers: path == UrlPaths.signIn
-                ? null
-                : {
-                    HttpHeaders.authorizationHeader: token ?? '',
-                    'Content-Type': 'application/json',
-                  },
+            headers: {
+              HttpHeaders.authorizationHeader: token ?? '',
+              'Content-Type': 'application/json',
+            },
+            body: request,
+          )
+          .timeout(timeout);
+      if (response.statusCode == 200) {
+        return Future.value(response);
+      }
+      final String? reason = response.reasonPhrase;
+      throw _processResponse(
+        response.statusCode,
+        response.request?.url.toString() ?? uri.toString(),
+        reason == null || reason.isEmpty ? null : reason,
+      );
+    } on SocketException {
+      throw FetchDataException('No internet connection', uri.toString());
+    } on TimeoutException {
+      throw ApiNotRespondingException('Timeout', uri.toString());
+    }
+  }
+
+  Future<http.Response> deleteData(
+    String path, {
+    String? request,
+    Map<String, String>? parameters,
+  }) async {
+    final Uri uri = https
+        ? Uri.https(apiAuthority, '$apiPath$path', parameters)
+        : Uri.http(apiAuthority, '$apiPath$path', parameters);
+    try {
+      final String? token = await secureStorageLocal.jwtToken;
+      final http.Response response = await http
+          .delete(
+            uri,
+            headers: {
+              HttpHeaders.authorizationHeader: token ?? '',
+              'Content-Type': 'application/json',
+            },
             body: request,
           )
           .timeout(timeout);

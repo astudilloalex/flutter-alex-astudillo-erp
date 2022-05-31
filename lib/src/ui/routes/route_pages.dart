@@ -7,6 +7,8 @@ import 'package:alex_astudillo_erp/src/ui/pages/country/country_binding.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/country/country_page.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/home/home_binding.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/home/home_page.dart';
+import 'package:alex_astudillo_erp/src/ui/pages/privilege/privilege_binding.dart';
+import 'package:alex_astudillo_erp/src/ui/pages/privilege/privilege_page.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/security/security_binding.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/security/security_page.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/sign_in/sign_in_binding.dart';
@@ -60,6 +62,13 @@ class RoutePages {
         page: () => const SecurityPage(),
         binding: const SecurityBinding(),
         middlewares: [AuthMiddleware()],
+        children: [
+          GetPage(
+            name: RouteNames.privilege,
+            page: () => const PrivilegePage(),
+            binding: const PrivilegeBinding(),
+          ),
+        ],
       ),
       GetPage(
         name: RouteNames.signIn,

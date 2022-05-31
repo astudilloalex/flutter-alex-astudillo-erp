@@ -13,7 +13,7 @@ class CompanyHttp implements CompanyRepository {
 
   @override
   Future<CompanyResponse> create(final Company entity) async {
-    final http.Response response = await client.post(
+    final http.Response response = await client.postData(
       '${UrlPaths.companies}${UrlPaths.create}',
       request: await compute(companyToJson, entity),
     );
@@ -34,7 +34,7 @@ class CompanyHttp implements CompanyRepository {
 
   @override
   Future<CompanyResponse> update(final Company entity) async {
-    final http.Response response = await client.put(
+    final http.Response response = await client.putData(
       '${UrlPaths.companies}${UrlPaths.update}',
       request: await compute(companyToJson, entity),
     );
@@ -43,7 +43,7 @@ class CompanyHttp implements CompanyRepository {
 
   @override
   Future<CompanyResponse> findById(final int id) async {
-    final http.Response response = await client.get(
+    final http.Response response = await client.getData(
       '${UrlPaths.companies}/$id',
     );
     return compute(companyResponseFromJson, response.body);

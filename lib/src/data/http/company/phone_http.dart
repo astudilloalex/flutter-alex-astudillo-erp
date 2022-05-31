@@ -31,7 +31,7 @@ class PhoneHttp implements PhoneRepository {
 
   @override
   Future<PhoneResponse> findByPersonId(final int id) async {
-    final http.Response response = await client.get(
+    final http.Response response = await client.getData(
       '${UrlPaths.phones}${UrlPaths.person}/$id',
     );
     return compute(phoneResponseFromJson, response.body);

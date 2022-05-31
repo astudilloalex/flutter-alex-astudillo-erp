@@ -25,7 +25,7 @@ class BottomPaginatedInfo extends StatelessWidget {
         children: [
           Expanded(
             child: loading
-                ? Text('loading'.tr)
+                ? Text('loading'.tr, textAlign: TextAlign.end)
                 : Text.rich(
                     TextSpan(
                       text: '${response.offset ?? ''} - ',

@@ -12,7 +12,7 @@ class EstablishmentHttp implements EstablishmentRepository {
 
   @override
   Future<EstablishmentResponse> companyEstablishments(int companyId) async {
-    final http.Response response = await client.get(
+    final http.Response response = await client.getData(
       UrlPaths.establishments + UrlPaths.read,
       {'companyId': '$companyId'},
     );

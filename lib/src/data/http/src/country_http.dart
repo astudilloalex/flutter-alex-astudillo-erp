@@ -12,7 +12,7 @@ class CountryHttp implements CountryRepository {
 
   @override
   Future<CountryResponse> create(final Country entity) async {
-    final http.Response response = await client.post(
+    final http.Response response = await client.postData(
       '${UrlPaths.countries}${UrlPaths.create}',
       request: await compute(countryToJson, entity),
     );
@@ -30,7 +30,7 @@ class CountryHttp implements CountryRepository {
     final int page = 1,
     final int size = 10,
   }) async {
-    final http.Response response = await client.get(
+    final http.Response response = await client.getData(
       '${UrlPaths.countries}${UrlPaths.read}',
       {'page': '$page', 'size': '$size'},
     );
@@ -39,7 +39,7 @@ class CountryHttp implements CountryRepository {
 
   @override
   Future<CountryResponse> update(final Country entity) async {
-    final http.Response response = await client.put(
+    final http.Response response = await client.putData(
       '${UrlPaths.countries}${UrlPaths.update}',
       request: await compute(countryToJson, entity),
     );

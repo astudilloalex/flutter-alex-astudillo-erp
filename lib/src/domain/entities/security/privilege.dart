@@ -35,8 +35,8 @@ class Privilege {
     return Privilege(
       id: json['id'] as int?,
       name: json['name'] as String,
-      creationDate: DateTime.parse(json['creationDate'].toString()),
-      updateDate: DateTime.parse(json['updateDate'].toString()),
+      creationDate: DateTime.tryParse(json['creationDate'].toString()),
+      updateDate: DateTime.tryParse(json['updateDate'].toString()),
     );
   }
 

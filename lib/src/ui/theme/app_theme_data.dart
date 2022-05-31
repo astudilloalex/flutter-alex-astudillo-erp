@@ -40,7 +40,6 @@ class AppThemeData {
             borderRadius: BorderRadius.circular(16.0),
           ),
           primary: LightColors.secondary,
-          minimumSize: const Size(48.0, 48.0),
         ),
       ),
       // Input theme (TextFormField, TextField).
@@ -58,7 +57,6 @@ class AppThemeData {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           primary: LightColors.secondaryVariant,
-          minimumSize: const Size(48.0, 48.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.0),
           ),
@@ -73,6 +71,15 @@ class AppThemeData {
       ),
       textTheme: TextTheme(
         bodyText2: GoogleFonts.poppins(
+          color: LightColors.secondaryVariant,
+        ),
+        subtitle1: GoogleFonts.poppins(
+          color: LightColors.secondaryVariant,
+        ),
+        subtitle2: GoogleFonts.poppins(
+          color: LightColors.secondaryVariant,
+        ),
+        headline6: GoogleFonts.poppins(
           color: LightColors.secondaryVariant,
         ),
       ),
