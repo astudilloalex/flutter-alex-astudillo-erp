@@ -33,4 +33,10 @@ abstract class CrudRepository<T, ID> {
 
   /// Saves all given [entities].
   Future<BackendResponse<T>> saveAll(final Iterable<T> entities);
+
+  /// Update a given [entity].
+  Future<BackendResponse<T>> update(final T entity);
+
+  /// Update all given [entities].
+  Future<BackendResponse<T>> updateAll(final Iterable<T> entities);
 }
