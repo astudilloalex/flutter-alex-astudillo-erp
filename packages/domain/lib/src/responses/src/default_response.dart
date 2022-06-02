@@ -6,7 +6,7 @@ class DefaultResponse {
     this.numberOfElements,
     this.offset,
     this.pageNumber,
-    required this.status,
+    required this.statusCode,
     this.totalElements,
     this.totalPages,
   });
@@ -17,7 +17,7 @@ class DefaultResponse {
   final int? numberOfElements;
   final int? offset;
   final int? pageNumber;
-  final int status;
+  final int statusCode;
   final int? totalElements;
   final int? totalPages;
 
@@ -28,7 +28,7 @@ class DefaultResponse {
     final int? numberOfElements,
     final int? offset,
     final int? pageNumber,
-    final int? status,
+    final int? statusCode,
     final int? totalElements,
     final int? totalPages,
   }) {
@@ -39,7 +39,7 @@ class DefaultResponse {
       numberOfElements: numberOfElements ?? this.numberOfElements,
       offset: offset ?? this.offset,
       pageNumber: pageNumber ?? this.pageNumber,
-      status: status ?? this.status,
+      statusCode: statusCode ?? this.statusCode,
       totalElements: totalElements ?? this.totalElements,
       totalPages: totalPages ?? this.totalPages,
     );
@@ -53,16 +53,9 @@ class DefaultResponse {
       numberOfElements: json['numberOfElements'] as int?,
       offset: json['offset'] as int?,
       pageNumber: json['pageNumber'] as int?,
-      status: json['status'] as int,
+      statusCode: json['statusCode'] as int,
       totalElements: json['totalElements'] as int?,
       totalPages: json['totalPages'] as int?,
     );
-  }
-
-  int? get lastElement {
-    if (numberOfElements != null && offset != null) {
-      return offset! - 1 + numberOfElements!;
-    }
-    return null;
   }
 }

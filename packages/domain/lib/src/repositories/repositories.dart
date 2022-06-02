@@ -8,6 +8,8 @@ export 'src/country_repository.dart';
 export 'src/gender_repository.dart';
 export 'src/hr/department_repository.dart';
 export 'src/hr/job_repository.dart';
+export 'src/local/secure_storage_repository.dart';
+export 'src/local/storage_repository.dart';
 export 'src/person_document_type_repository.dart.dart';
 export 'src/security/privilege_repository.dart';
 export 'src/security/role_repository.dart';
