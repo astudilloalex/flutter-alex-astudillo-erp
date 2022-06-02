@@ -1,0 +1,14 @@
+export 'src/city_http.dart';
+export 'src/company/address_http.dart';
+export 'src/company/company_http.dart';
+export 'src/company/establishment_http.dart';
+export 'src/company/person_http.dart';
+export 'src/company/phone_http.dart';
+export 'src/country_http.dart';
+export 'src/gender_http.dart';
+export 'src/hr/department_http.dart';
+export 'src/hr/job_http.dart';
+export 'src/person_document_type_http.dart';
+export 'src/security/privilege_http.dart';
+export 'src/security/role_http.dart';
+export 'src/security/user_http.dart';
