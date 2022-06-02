@@ -58,4 +58,11 @@ class DefaultResponse {
       totalPages: json['totalPages'] as int?,
     );
   }
+
+  int? get lastElement {
+    if (numberOfElements != null && offset != null) {
+      return offset! - 1 + numberOfElements!;
+    }
+    return null;
+  }
 }
