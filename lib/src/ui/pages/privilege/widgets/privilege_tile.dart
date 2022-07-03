@@ -1,8 +1,8 @@
-import 'package:alex_astudillo_erp/src/domain/entities/security/privilege.dart';
 import 'package:alex_astudillo_erp/src/ui/dialogs/add_edit_privilege/add_edit_privilege_dialog.dart';
+import 'package:alex_astudillo_erp/src/ui/pages/privilege/privilege_controller.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/privilege/widgets/privilege_delete_dialog.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/privilege/widgets/privilege_detail_dialog.dart';
-import 'package:alex_astudillo_erp/src/ui/widgets/custom_confirm_delete_dialog.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,17 +31,17 @@ class PrivilegeTile extends StatelessWidget {
             ),
             const SizedBox(width: 5.0),
             IconButton(
-              onPressed: () => Get.dialog(
+              onPressed: () => Get.dialog<Privilege?>(
                 const AddEditPrivilegeDialog(),
                 arguments: privilege,
                 barrierDismissible: false,
-              ),
+              ).then(Get.find<PrivilegeController>().updatePrivilege),
               icon: const Icon(Icons.edit_outlined),
               splashRadius: 25.0,
             ),
             const SizedBox(width: 5.0),
             IconButton(
-              onPressed: () => Get.dialog(
+              onPressed: () => Get.dialog<Privilege?>(
                 PrivilegeDeleteDialog(privilege),
                 barrierDismissible: false,
               ),

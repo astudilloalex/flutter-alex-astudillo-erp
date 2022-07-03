@@ -10,10 +10,10 @@ class Paths {
   static const String deleteAll = '/delete-all';
   static const String deleteAllById = '/delete-all-by-id';
   static const String deleteById = '/delete-by-id';
-  static const String findAll = '/find-all';
+  static const String findAllByPage = '/find-all-by-page';
   static const String findAllById = '/find-all-by-id';
   static const String save = '/save';
-  static const String saveAll = '/saveAll';
+  static const String saveAll = '/save-all';
   static const String update = '/update';
   static const String updateAll = '/update-all';
 

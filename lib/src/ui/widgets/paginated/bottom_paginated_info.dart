@@ -1,4 +1,4 @@
-import 'package:alex_astudillo_erp/src/domain/responses/default_response.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

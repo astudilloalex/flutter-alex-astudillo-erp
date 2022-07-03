@@ -35,8 +35,10 @@ class EstablishmentHttp implements EstablishmentRepository {
   }
 
   @override
-  Future<BackendResponse<Establishment>> findAll(
-      {int page = 1, int size = 10}) {
+  Future<BackendResponse<Establishment>> findAll({
+    int page = 1,
+    int size = 10,
+  }) {
     // TODO: implement findAll
     throw UnimplementedError();
   }
@@ -61,7 +63,8 @@ class EstablishmentHttp implements EstablishmentRepository {
 
   @override
   Future<BackendResponse<Establishment>> saveAll(
-      Iterable<Establishment> entities) {
+    Iterable<Establishment> entities,
+  ) {
     // TODO: implement saveAll
     throw UnimplementedError();
   }
@@ -74,7 +77,8 @@ class EstablishmentHttp implements EstablishmentRepository {
 
   @override
   Future<BackendResponse<Establishment>> updateAll(
-      Iterable<Establishment> entities) {
+    Iterable<Establishment> entities,
+  ) {
     // TODO: implement updateAll
     throw UnimplementedError();
   }

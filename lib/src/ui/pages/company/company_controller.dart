@@ -1,9 +1,6 @@
 import 'package:alex_astudillo_erp/src/app/controllers/app_controller.dart';
-import 'package:alex_astudillo_erp/src/core/exceptions/http_exceptions.dart';
-import 'package:alex_astudillo_erp/src/data/http/company/phone_http.dart';
-import 'package:alex_astudillo_erp/src/domain/entities/company/company.dart';
-import 'package:alex_astudillo_erp/src/domain/entities/company/phone.dart';
-import 'package:alex_astudillo_erp/src/domain/responses/company/phone_response.dart';
+import 'package:data/data.dart';
+import 'package:domain/domain.dart';
 import 'package:get/get.dart';
 
 class CompanyController extends GetxController {
@@ -25,12 +22,10 @@ class CompanyController extends GetxController {
   Future<void> _init() async {
     try {
       const PhoneHttp http = PhoneHttp();
-      final PhoneResponse response = await http.findByPersonId(
+      final BackendResponse<Phone> response = await http.findById(
         _company.value?.person.id ?? 0,
       );
-      if (response.phones.isNotEmpty) _personPhone(response.phones.first);
-    } on HttpException catch (e) {
-      _appController.manageHttpError(e);
+      if (response.data.isNotEmpty) _personPhone(response.data.first);
     } on Exception catch (e) {
       _appController.manageError(e);
     } finally {

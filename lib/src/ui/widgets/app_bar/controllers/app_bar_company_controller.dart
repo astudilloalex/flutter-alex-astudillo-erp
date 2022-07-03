@@ -1,9 +1,6 @@
 import 'package:alex_astudillo_erp/src/app/controllers/app_controller.dart';
-import 'package:alex_astudillo_erp/src/core/exceptions/http_exceptions.dart';
-import 'package:alex_astudillo_erp/src/data/http/company/company_http.dart';
-import 'package:alex_astudillo_erp/src/data/http/company/establishment_http.dart';
-import 'package:alex_astudillo_erp/src/domain/entities/company/company.dart';
-import 'package:alex_astudillo_erp/src/domain/entities/company/establishment.dart';
+import 'package:data/data.dart';
+import 'package:domain/domain.dart';
 import 'package:get/get.dart';
 
 class AppBarCompanyController extends GetxController {
@@ -27,8 +24,8 @@ class AppBarCompanyController extends GetxController {
 
   Future<void> _init() async {
     try {
-      await const CompanyHttp().read().then((value) {
-        _companies(value.companies);
+      await const CompanyHttp().findAll().then((value) {
+        _companies(value.data);
       });
       _selectedCompany(
         _companies.value.firstWhereOrNull(
@@ -36,8 +33,6 @@ class AppBarCompanyController extends GetxController {
         ),
       );
       await updateEstablishments();
-    } on HttpException catch (e) {
-      _appController.manageHttpError(e);
     } on Exception catch (e) {
       _appController.manageError(e);
     } finally {
@@ -47,8 +42,8 @@ class AppBarCompanyController extends GetxController {
 
   Future<void> updateEstablishments() async {
     await _establishmentHttp
-        .companyEstablishments(_selectedCompany.value!.id!)
-        .then((value) => _establishments(value.establishments));
+        .findById(_selectedCompany.value!.id!)
+        .then((value) => _establishments(value.data));
     if (establishments.isNotEmpty) {
       _selectedEstablishment(
         _establishments.value.firstWhereOrNull(

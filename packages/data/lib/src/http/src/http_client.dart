@@ -12,7 +12,7 @@ class HttpClient<T> {
   const HttpClient({
     this.apiAuthority = '192.168.18.8:8080',
     this.https = false,
-    this.timeout = const Duration(milliseconds: 10),
+    this.timeout = const Duration(seconds: 10),
   });
 
   final String apiAuthority;

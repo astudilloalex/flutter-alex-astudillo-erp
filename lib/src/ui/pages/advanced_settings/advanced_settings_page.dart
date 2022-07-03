@@ -1,5 +1,4 @@
 import 'package:alex_astudillo_erp/src/ui/pages/advanced_settings/widgets/advanced_settings_item.dart';
-import 'package:alex_astudillo_erp/src/ui/pages/advanced_settings/widgets/advanced_settings_item_list.dart';
 import 'package:alex_astudillo_erp/src/ui/routes/route_names.dart';
 import 'package:alex_astudillo_erp/src/ui/widgets/scaffold/custom_scaffold.dart';
 import 'package:flutter/material.dart';

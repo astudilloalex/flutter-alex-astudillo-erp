@@ -10,39 +10,40 @@ class CompanyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
-        body: Scrollbar(
-      thumbVisibility: true,
-      child: CustomScrollView(
-        primary: false,
-        slivers: [
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-            sliver: SliverToBoxAdapter(
-              child: Text(
-                'company'.tr,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
+      body: Scrollbar(
+        thumbVisibility: true,
+        child: CustomScrollView(
+          primary: false,
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+              sliver: SliverToBoxAdapter(
+                child: Text(
+                  'company'.tr,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                  ),
                 ),
               ),
             ),
-          ),
-          const CompanyInfo(),
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
-            sliver: SliverToBoxAdapter(
-              child: Text(
-                'legalReason'.tr,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.0,
+            const CompanyInfo(),
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
+              sliver: SliverToBoxAdapter(
+                child: Text(
+                  'legalReason'.tr,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                  ),
                 ),
               ),
             ),
-          ),
-          const CompanyPersonInfo(),
-        ],
+            const CompanyPersonInfo(),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

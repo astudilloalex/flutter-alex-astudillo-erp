@@ -1,5 +1,5 @@
 import 'package:alex_astudillo_erp/src/core/extensions/extensions.dart';
-import 'package:alex_astudillo_erp/src/domain/entities/security/privilege.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

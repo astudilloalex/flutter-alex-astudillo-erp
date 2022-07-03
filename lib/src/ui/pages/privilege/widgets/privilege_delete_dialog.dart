@@ -1,6 +1,6 @@
-import 'package:alex_astudillo_erp/src/domain/entities/security/privilege.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/privilege/privilege_controller.dart';
 import 'package:alex_astudillo_erp/src/ui/widgets/custom_confirm_delete_dialog.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

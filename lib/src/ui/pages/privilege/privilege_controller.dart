@@ -1,9 +1,6 @@
 import 'package:alex_astudillo_erp/src/app/controllers/app_controller.dart';
-import 'package:alex_astudillo_erp/src/core/exceptions/http_exceptions.dart';
-import 'package:alex_astudillo_erp/src/data/http/security/privilege_http.dart';
-import 'package:alex_astudillo_erp/src/domain/entities/security/privilege.dart';
-import 'package:alex_astudillo_erp/src/domain/responses/default_response.dart';
-import 'package:alex_astudillo_erp/src/domain/responses/security/privilege_response.dart';
+import 'package:data/data.dart';
+import 'package:domain/domain.dart';
 import 'package:get/get.dart';
 
 class PrivilegeController extends GetxController {
@@ -16,7 +13,7 @@ class PrivilegeController extends GetxController {
   final RxBool _loading = RxBool(true);
   final Rx<List<Privilege>> _privileges = Rx<List<Privilege>>([]);
   final Rx<DefaultResponse> _defaultResponse = Rx<DefaultResponse>(
-    const DefaultResponse(status: 0, message: ''),
+    const DefaultResponse(statusCode: 0, message: ''),
   );
 
   @override
@@ -27,14 +24,12 @@ class PrivilegeController extends GetxController {
 
   Future<void> _init() async {
     try {
-      final PrivilegeResponse response = await _privilegeHttp.read(
+      final BackendResponse<Privilege> response = await _privilegeHttp.findAll(
         page: defaultResponse.pageNumber ?? 1,
         size: _pageSize,
       );
       _privileges(response.data);
       _defaultResponse(response.defaultResponse);
-    } on HttpException catch (e) {
-      _appController.manageHttpError(e);
     } on Exception catch (e) {
       _appController.manageError(e);
     } finally {
@@ -45,14 +40,12 @@ class PrivilegeController extends GetxController {
   Future<void> nextPage() async {
     try {
       _loading(true);
-      final PrivilegeResponse response = await _privilegeHttp.read(
+      final BackendResponse<Privilege> response = await _privilegeHttp.findAll(
         page: (_defaultResponse.value.pageNumber ?? 1) + 1,
         size: _pageSize,
       );
       _privileges(response.data);
       _defaultResponse(response.defaultResponse);
-    } on HttpException catch (e) {
-      _appController.manageHttpError(e);
     } on Exception catch (e) {
       _appController.manageError(e);
     } finally {
@@ -63,14 +56,12 @@ class PrivilegeController extends GetxController {
   Future<void> previousPage() async {
     try {
       _loading(true);
-      final PrivilegeResponse response = await _privilegeHttp.read(
+      final BackendResponse<Privilege> response = await _privilegeHttp.findAll(
         page: (_defaultResponse.value.pageNumber ?? 2) - 1,
         size: _pageSize,
       );
       _privileges(response.data);
       _defaultResponse(response.defaultResponse);
-    } on HttpException catch (e) {
-      _appController.manageHttpError(e);
     } on Exception catch (e) {
       _appController.manageError(e);
     } finally {
@@ -86,18 +77,26 @@ class PrivilegeController extends GetxController {
     _privileges(privileges);
   }
 
+  void updatePrivilege(final Privilege? privilege) {
+    if (privilege == null) return;
+    final List<Privilege> privileges = [..._privileges.value];
+    final int index = privileges.indexWhere(
+      (element) => element.id == privilege.id,
+    );
+    if (index >= 0) privileges[index] = privilege;
+    _privileges(privileges);
+  }
+
   void deletePrivilege(final Privilege privilege) {
     _appController.showOverlay(() async {
       try {
-        final PrivilegeResponse response = await _privilegeHttp.delete(
+        final BackendResponse<Privilege> response = await _privilegeHttp.delete(
           privilege,
         );
-        if (response.defaultResponse.status == 200) {
+        if (response.defaultResponse.statusCode == 200) {
           await _init();
           Get.back();
         }
-      } on HttpException catch (e) {
-        _appController.manageHttpError(e);
       } on Exception catch (e) {
         _appController.manageError(e);
       }

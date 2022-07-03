@@ -1,10 +1,6 @@
 import 'package:alex_astudillo_erp/src/app/controllers/app_controller.dart';
-import 'package:alex_astudillo_erp/src/core/exceptions/http_exceptions.dart';
-import 'package:alex_astudillo_erp/src/data/http/src/country_http.dart';
-import 'package:alex_astudillo_erp/src/domain/entities/country.dart';
-import 'package:alex_astudillo_erp/src/domain/responses/default_response.dart';
-import 'package:alex_astudillo_erp/src/domain/responses/src/country_response.dart';
-import 'package:flutter/material.dart';
+import 'package:data/data.dart';
+import 'package:domain/domain.dart';
 import 'package:get/get.dart';
 
 class CountryController extends GetxController {
@@ -22,7 +18,7 @@ class CountryController extends GetxController {
   final List<Country> _countries = [];
   DefaultResponse _defaultResponse = const DefaultResponse(
     message: '',
-    status: 200,
+    statusCode: 200,
   );
 
   @override
@@ -33,11 +29,11 @@ class CountryController extends GetxController {
 
   Future<void> _init() async {
     try {
-      final CountryResponse response = await countryHttp.read(size: _pageSize);
-      _countries.addAll(response.countries);
+      final BackendResponse<Country> response = await countryHttp.findAll(
+        size: _pageSize,
+      );
+      _countries.addAll(response.data);
       _defaultResponse = response.defaultResponse;
-    } on HttpException catch (e) {
-      appController.manageHttpError(e);
     } on Exception catch (e) {
       appController.manageError(e);
     } finally {
@@ -50,12 +46,12 @@ class CountryController extends GetxController {
     _loading = true;
     update();
     try {
-      final CountryResponse response = await countryHttp.read(
+      final BackendResponse<Country> response = await countryHttp.findAll(
         page: (_defaultResponse.pageNumber ?? 1) + 1,
         size: _pageSize,
       );
       _countries.clear();
-      _countries.addAll(response.countries);
+      _countries.addAll(response.data);
       _defaultResponse = response.defaultResponse;
     } finally {
       _loading = false;
@@ -67,12 +63,12 @@ class CountryController extends GetxController {
     _loading = true;
     update();
     try {
-      final CountryResponse response = await countryHttp.read(
+      final BackendResponse<Country> response = await countryHttp.findAll(
         page: (_defaultResponse.pageNumber ?? 2) - 1,
         size: _pageSize,
       );
       _countries.clear();
-      _countries.addAll(response.countries);
+      _countries.addAll(response.data);
       _defaultResponse = response.defaultResponse;
     } finally {
       _loading = false;

@@ -4,7 +4,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-class AddEditPrivilegeController extends GetxController {
+class AddEditRoleController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final TextEditingController nameController = TextEditingController();

@@ -1,4 +1,4 @@
-import 'package:alex_astudillo_erp/src/domain/entities/security/user.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 
 class UserTile extends StatelessWidget {
@@ -14,8 +14,8 @@ class UserTile extends StatelessWidget {
         title: Row(
           children: [
             Expanded(child: Text(user.username)),
-            Expanded(child: Text(user.person.firstName ?? '-')),
-            Expanded(child: Text(user.person.lastName ?? '-')),
+            Expanded(child: Text('${user.accountNonExpired}')),
+            Expanded(child: Text('${user.accountNonExpired}')),
           ],
         ),
         trailing: const Icon(Icons.arrow_forward_ios_outlined),

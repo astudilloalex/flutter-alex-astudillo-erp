@@ -17,5 +17,6 @@ class HomeController extends GetxController {
     // _appController.showOverlay(() async {
     //   await const UserHttp().user;
     // });
+    _appController.showOverlay(() async {});
   }
 }

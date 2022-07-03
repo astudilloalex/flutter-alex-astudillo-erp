@@ -1,5 +1,5 @@
-import 'package:alex_astudillo_erp/src/domain/entities/security/user.dart';
 import 'package:alex_astudillo_erp/src/ui/routes/route_names.dart';
+import 'package:domain/domain.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {

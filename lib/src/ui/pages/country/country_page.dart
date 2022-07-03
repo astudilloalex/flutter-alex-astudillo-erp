@@ -1,9 +1,9 @@
-import 'package:alex_astudillo_erp/src/domain/entities/country.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/country/country_controller.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/country/widgets/add_edit_country/add_edit_country_dialog.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/country/widgets/country_list.dart';
 import 'package:alex_astudillo_erp/src/ui/widgets/paginated/bottom_paginated_info.dart';
 import 'package:alex_astudillo_erp/src/ui/widgets/scaffold/custom_scaffold.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:responsive_design/responsive_design.dart';

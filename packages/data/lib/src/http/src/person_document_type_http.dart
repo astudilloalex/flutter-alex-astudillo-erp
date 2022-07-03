@@ -10,14 +10,16 @@ class PersonDocumentTypeHttp implements PersonDocumentTypeRepository {
 
   @override
   Future<BackendResponse<PersonDocumentType>> delete(
-      PersonDocumentType entity) {
+    PersonDocumentType entity,
+  ) {
     // TODO: implement delete
     throw UnimplementedError();
   }
 
   @override
-  Future<BackendResponse<PersonDocumentType>> deleteAll(
-      {Iterable<PersonDocumentType>? entities}) {
+  Future<BackendResponse<PersonDocumentType>> deleteAll({
+    Iterable<PersonDocumentType>? entities,
+  }) {
     // TODO: implement deleteAll
     throw UnimplementedError();
   }
@@ -35,8 +37,10 @@ class PersonDocumentTypeHttp implements PersonDocumentTypeRepository {
   }
 
   @override
-  Future<BackendResponse<PersonDocumentType>> findAll(
-      {int page = 1, int size = 10}) {
+  Future<BackendResponse<PersonDocumentType>> findAll({
+    int page = 1,
+    int size = 10,
+  }) {
     // TODO: implement findAll
     throw UnimplementedError();
   }
@@ -61,21 +65,24 @@ class PersonDocumentTypeHttp implements PersonDocumentTypeRepository {
 
   @override
   Future<BackendResponse<PersonDocumentType>> saveAll(
-      Iterable<PersonDocumentType> entities) {
+    Iterable<PersonDocumentType> entities,
+  ) {
     // TODO: implement saveAll
     throw UnimplementedError();
   }
 
   @override
   Future<BackendResponse<PersonDocumentType>> update(
-      PersonDocumentType entity) {
+    PersonDocumentType entity,
+  ) {
     // TODO: implement update
     throw UnimplementedError();
   }
 
   @override
   Future<BackendResponse<PersonDocumentType>> updateAll(
-      Iterable<PersonDocumentType> entities) {
+    Iterable<PersonDocumentType> entities,
+  ) {
     // TODO: implement updateAll
     throw UnimplementedError();
   }

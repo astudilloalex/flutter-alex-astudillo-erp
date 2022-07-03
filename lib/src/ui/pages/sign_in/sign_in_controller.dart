@@ -1,13 +1,8 @@
 import 'package:alex_astudillo_erp/src/app/controllers/app_controller.dart';
 import 'package:alex_astudillo_erp/src/app/controllers/auth_controller.dart';
-import 'package:alex_astudillo_erp/src/core/exceptions/http_exceptions.dart';
-import 'package:alex_astudillo_erp/src/data/http/company/company_http.dart';
-import 'package:alex_astudillo_erp/src/data/http/company/establishment_http.dart';
-import 'package:alex_astudillo_erp/src/data/http/src/sign_in_http.dart';
-import 'package:alex_astudillo_erp/src/data/local/secure_storage_local.dart';
-import 'package:alex_astudillo_erp/src/domain/requests/src/sign_in_request.dart';
-import 'package:alex_astudillo_erp/src/domain/responses/security/sign_in_response.dart';
 import 'package:alex_astudillo_erp/src/ui/routes/route_names.dart';
+import 'package:data/data.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -34,38 +29,32 @@ class SignInController extends GetxController {
 
   // Sign in method.
   void signIn() {
-    const SignInHttp http = SignInHttp();
+    const UserHttp http = UserHttp();
     _appController.showOverlay(() async {
       try {
-        final SignInResponse response = await http.signIn(
-          SignInRequest(
-            username: usernameController.text.trim(),
-            password: passwordController.text,
-          ),
+        final BackendResponse<User> response = await http.authenticate(
+          usernameController.text.trim(),
+          passwordController.text,
         );
-        if (response.defaultResponse.status == 200) {
+        if (response.defaultResponse.statusCode == 200) {
           await const SecureStorageLocal().saveToken(response.token);
-          await const CompanyHttp()
-              .findById(_appController.localStorage.currentCompanyId)
-              .then((value) {
-            _appController.company = value.companies.first;
+          await const CompanyHttp().findById(1).then((value) {
+            _appController.company = value.data.first;
           });
-          await const EstablishmentHttp()
-              .companyEstablishments(
-            _appController.company!.id!,
-          )
-              .then(
-            (value) {
-              if (value.establishments.isNotEmpty) {
-                _appController.establishment = value.establishments.first;
-              }
-            },
-          );
-          _authController.user = response.user;
+          // await const EstablishmentHttp()
+          //     .findById(
+          //   _appController.company!.id!,
+          // )
+          //     .then(
+          //   (value) {
+          //     if (value.data.isNotEmpty) {
+          //       _appController.establishment = value.data.first;
+          //     }
+          //   },
+          // );
+          _authController.user = response.data.first;
           Get.offNamed(RouteNames.home);
         }
-      } on HttpException catch (e) {
-        _appController.manageHttpError(e);
       } on Exception catch (e) {
         _appController.manageError(e);
       }

@@ -1,4 +1,6 @@
+import 'package:data/src/enums/src/http/request_method.dart';
 import 'package:data/src/http/src/http_client.dart';
+import 'package:data/src/http/src/paths.dart';
 import 'package:domain/domain.dart';
 
 class CompanyHttp implements CompanyRepository {
@@ -45,9 +47,8 @@ class CompanyHttp implements CompanyRepository {
   }
 
   @override
-  Future<BackendResponse<Company>> findById(int id) {
-    // TODO: implement findById
-    throw UnimplementedError();
+  Future<BackendResponse<Company>> findById(final int id) {
+    return client.request('${Paths.companies}/$id', RequestMethod.get);
   }
 
   @override

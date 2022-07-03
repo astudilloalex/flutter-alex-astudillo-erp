@@ -1,9 +1,7 @@
 import 'package:alex_astudillo_erp/src/app/controllers/app_controller.dart';
 import 'package:alex_astudillo_erp/src/app/controllers/auth_controller.dart';
-import 'package:alex_astudillo_erp/src/core/exceptions/http_exceptions.dart';
-import 'package:alex_astudillo_erp/src/data/http/company/company_http.dart';
-import 'package:alex_astudillo_erp/src/data/http/security/user_http.dart';
 import 'package:alex_astudillo_erp/src/ui/routes/route_names.dart';
+import 'package:data/data.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
@@ -23,17 +21,14 @@ class SplashController extends GetxController {
 
   Future<void> _init() async {
     try {
-      // await const UserHttp().user.then((value) {
-      //   _authController.user = value.users.first;
+      // await const UserHttp().findByUsername('username').then((value) {
+      //   _authController.user = value.data.first;
       // });
-      await const CompanyHttp()
-          .findById(_appController.localStorage.currentCompanyId)
-          .then((value) {
-        _appController.company = value.companies.first;
-      });
+      // await const CompanyHttp().findById(1).then((value) {
+      //   _appController.company = value.data.first;
+      // });
+      await Future.delayed(const Duration(seconds: 2));
       Get.offNamed(RouteNames.home);
-    } on HttpException {
-      Get.offNamed(RouteNames.signIn);
     } on Exception catch (e) {
       _error(e.toString());
       _appController.manageError(e);

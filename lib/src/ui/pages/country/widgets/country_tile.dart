@@ -1,7 +1,7 @@
-import 'package:alex_astudillo_erp/src/domain/entities/country.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/country/country_controller.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/country/widgets/add_edit_country/add_edit_country_dialog.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/country/widgets/country_details_dialog.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

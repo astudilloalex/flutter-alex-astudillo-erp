@@ -1,6 +1,6 @@
 import 'package:alex_astudillo_erp/src/app/controllers/app_controller.dart';
-import 'package:alex_astudillo_erp/src/data/http/security/privilege_http.dart';
 import 'package:alex_astudillo_erp/src/ui/pages/privilege/privilege_controller.dart';
+import 'package:data/data.dart';
 import 'package:get/get.dart';
 
 class PrivilegeBinding implements Bindings {

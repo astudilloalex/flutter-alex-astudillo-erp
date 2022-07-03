@@ -1,9 +1,7 @@
 import 'package:alex_astudillo_erp/src/app/controllers/app_controller.dart';
-import 'package:alex_astudillo_erp/src/core/exceptions/http_exceptions.dart';
-import 'package:alex_astudillo_erp/src/data/http/security/user_http.dart';
-import 'package:alex_astudillo_erp/src/domain/entities/security/user.dart';
-import 'package:alex_astudillo_erp/src/domain/responses/default_response.dart';
-import 'package:alex_astudillo_erp/src/domain/responses/security/user_response.dart';
+import 'package:data/data.dart';
+import 'package:domain/domain.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class UserController extends GetxController {
@@ -18,7 +16,7 @@ class UserController extends GetxController {
 
   DefaultResponse _defaultResponse = const DefaultResponse(
     message: '',
-    status: 200,
+    statusCode: 200,
   );
 
   @override
@@ -30,11 +28,10 @@ class UserController extends GetxController {
   Future<void> _init() async {
     try {
       const UserHttp http = UserHttp();
-      final UserResponse response = await http.read(size: _pageSize);
-      _users.addAll(response.users);
+      final BackendResponse<User> response =
+          await http.findAll(size: _pageSize);
+      _users.addAll(response.data);
       _defaultResponse = response.defaultResponse;
-    } on HttpException catch (e) {
-      _appController.manageHttpError(e);
     } on Exception catch (e) {
       _appController.manageError(e);
     } finally {

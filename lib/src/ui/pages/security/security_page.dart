@@ -3,7 +3,6 @@ import 'package:alex_astudillo_erp/src/ui/widgets/app_bar/custom_app_bar.dart';
 import 'package:alex_astudillo_erp/src/ui/widgets/scaffold/custom_scaffold.dart';
 import 'package:alex_astudillo_erp/src/ui/widgets/square_card_button.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class SecurityPage extends StatelessWidget {

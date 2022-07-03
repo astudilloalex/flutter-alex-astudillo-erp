@@ -13,7 +13,6 @@ class User {
     this.accountNonExpired = true,
     this.credentialsNonExpired = true,
     this.enabled = true,
-    required this.person,
     this.creationDate,
     this.updateDate,
     required this.roles,
@@ -25,7 +24,6 @@ class User {
   final bool accountNonExpired;
   final bool credentialsNonExpired;
   final bool enabled;
-  final Person person;
   final DateTime? creationDate;
   final DateTime? updateDate;
   final List<Role> roles;
@@ -50,7 +48,6 @@ class User {
       credentialsNonExpired:
           credentialsNonExpired ?? this.credentialsNonExpired,
       enabled: enabled ?? this.enabled,
-      person: person ?? this.person,
       creationDate: creationDate ?? this.creationDate,
       updateDate: updateDate ?? this.updateDate,
       roles: roles ?? this.roles,
@@ -64,7 +61,6 @@ class User {
         accountNonExpired: json['accountNonExpired'] as bool,
         credentialsNonExpired: json['credentialsNonExpired'] as bool,
         enabled: json['enabled'] as bool,
-        person: Person.fromJson(json['person'] as Map<String, dynamic>),
         creationDate: DateTime.tryParse(json['creationDate'].toString()),
         updateDate: DateTime.tryParse(json['updateDate'].toString()),
         roles: List<Role>.from(
@@ -81,7 +77,6 @@ class User {
         'accountNonExpired': accountNonExpired,
         'credentialsNonExpired': credentialsNonExpired,
         'enabled': enabled,
-        'person': person.toJson(),
         'roles': List<dynamic>.from(roles.map((x) => x.toJson())),
       };
 }

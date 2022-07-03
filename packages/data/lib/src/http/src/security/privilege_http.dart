@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:data/src/enums/enums.dart';
 import 'package:data/src/http/src/http_client.dart';
+import 'package:data/src/http/src/paths.dart';
 import 'package:domain/domain.dart';
 
 class PrivilegeHttp implements PrivilegeRepository {
@@ -10,8 +14,11 @@ class PrivilegeHttp implements PrivilegeRepository {
 
   @override
   Future<BackendResponse<Privilege>> delete(final Privilege entity) {
-    // TODO: implement delete
-    throw UnimplementedError();
+    return client.request(
+      '${Paths.privileges}${Paths.delete}',
+      RequestMethod.delete,
+      body: json.encode(entity.toJson()),
+    );
   }
 
   @override
@@ -36,8 +43,11 @@ class PrivilegeHttp implements PrivilegeRepository {
 
   @override
   Future<BackendResponse<Privilege>> findAll({int page = 1, int size = 10}) {
-    // TODO: implement findAll
-    throw UnimplementedError();
+    return client.request(
+      '${Paths.privileges}${Paths.findAllByPage}',
+      RequestMethod.get,
+      parameters: {'page': '$page', 'size': '$size'},
+    );
   }
 
   @override
@@ -53,9 +63,12 @@ class PrivilegeHttp implements PrivilegeRepository {
   }
 
   @override
-  Future<BackendResponse<Privilege>> save(Privilege entity) {
-    // TODO: implement save
-    throw UnimplementedError();
+  Future<BackendResponse<Privilege>> save(final Privilege entity) {
+    return client.request(
+      '${Paths.privileges}${Paths.save}',
+      RequestMethod.post,
+      body: json.encode(entity.toJson()),
+    );
   }
 
   @override
@@ -65,9 +78,12 @@ class PrivilegeHttp implements PrivilegeRepository {
   }
 
   @override
-  Future<BackendResponse<Privilege>> update(Privilege entity) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<BackendResponse<Privilege>> update(final Privilege entity) {
+    return client.request(
+      '${Paths.privileges}${Paths.update}/${entity.id}',
+      RequestMethod.put,
+      body: json.encode(entity.toJson()),
+    );
   }
 
   @override

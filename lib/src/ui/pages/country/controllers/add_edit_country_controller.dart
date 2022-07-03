@@ -1,8 +1,6 @@
 import 'package:alex_astudillo_erp/src/app/controllers/app_controller.dart';
-import 'package:alex_astudillo_erp/src/core/exceptions/http_exceptions.dart';
-import 'package:alex_astudillo_erp/src/data/http/src/country_http.dart';
-import 'package:alex_astudillo_erp/src/domain/entities/country.dart';
-import 'package:alex_astudillo_erp/src/domain/responses/src/country_response.dart';
+import 'package:data/data.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,8 +37,8 @@ class AddEditCountryController extends GetxController {
     appController.showOverlay(() async {
       try {
         const CountryHttp http = CountryHttp();
-        final CountryResponse response = country == null
-            ? await http.create(
+        final BackendResponse<Country> response = country == null
+            ? await http.save(
                 Country(
                   code: codeController.text.trim(),
                   name: nameController.text.trim(),
@@ -54,17 +52,15 @@ class AddEditCountryController extends GetxController {
                   active: _active.value,
                 ),
               );
-        if (response.countries.isNotEmpty) {
+        if (response.data.isNotEmpty) {
           Get.back(
-            result: response.countries.first.copyWith(
+            result: response.data.first.copyWith(
               creationDate: country?.creationDate,
             ),
           );
         } else {
           appController.showErrorSnackbar(response.defaultResponse.message);
         }
-      } on HttpException catch (e) {
-        appController.manageHttpError(e);
       } on Exception catch (e) {
         appController.manageError(e);
       }
